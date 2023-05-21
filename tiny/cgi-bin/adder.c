@@ -15,7 +15,7 @@ int main(void) {
     *p = '\0';
     strcpy(arg1, buf);
     strcpy(arg2, p+1);
-    n1 = atoi(arg1);
+    n1 = atoi(arg1);  // atoi ASCII to integer, string을 int로 바꿔줌, int를 return
     n2 = atoi(arg2);
   }
 
@@ -31,6 +31,11 @@ int main(void) {
   printf("Connection: close\r\n");
   printf("Content-length: %d\r\n", (int)strlen(content));
   printf("Content-type: text/html\r\n\r\n");
+
+  if (getenv("REQUEST_METHOD") != NULL) {
+    fflush(stdout);
+    exit(0);
+  }
   printf("%s", content);
   fflush(stdout);
 
